@@ -12,7 +12,7 @@ import 'package:dotenv/dotenv.dart' as dotenv;
 
 void main(List<String> args) async {
   final env = dotenv.DotEnv(includePlatformEnvironment: true)..load();
-  final API_KEYS = env['API_KEYS'];
+  final apiKeys = env['API_KEYS'];
 
   final port = int.tryParse(
         env['PORT'] ?? '8080',
@@ -44,7 +44,7 @@ void main(List<String> args) async {
   final handler = const Pipeline()
       .addMiddleware(logRequestsCustom())
       .addMiddleware(authMiddleware(
-        apiKeys: API_KEYS,
+        apiKeys: apiKeys,
       ))
       .addMiddleware(rateLimitMiddleware())
       .addHandler(router.call);
