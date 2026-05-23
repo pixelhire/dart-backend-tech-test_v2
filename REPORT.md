@@ -406,6 +406,11 @@ Features:
 - Lightweight runtime image
 - `/health` endpoint healthcheck support
 
+```
+app % docker compose up --build
+
+```
+
 ---
 
 ## GitHub Actions CI
