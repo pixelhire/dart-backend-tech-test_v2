@@ -1,0 +1,37 @@
+name: Dart CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      RATE_LIMIT_MAX: 60
+      RATE_LIMIT_WINDOW_SEC: 60
+      API_KEYS: sandbox_key:standard_key:enhanced_key:enterprise_key
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Analyze project
+        run: dart analyze
+
+      - name: Run tests
+        run: dart test
